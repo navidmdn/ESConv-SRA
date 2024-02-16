@@ -1,0 +1,35 @@
+{
+    "dialog": [
+        "good How about you? Is there any idea about  covid20",
+        "I am doing well. Thanks for asking. It is really nice outside today. ",
+        "Recently  identified in london",
+        "Hopefully soon cases will be lowered due to the vaccine. How are you feeling about COVID?",
+        "Is that vaccine will help to control the new variant of corona",
+        "I think so. I have my fingers crossed.  How are you feeling during this pandemic? ",
+        "It was very hectic time for me .Initially we were scared to go to even grocery. Afterwards we are trained our self using safety measures.",
+        "I understand. I have also been on edge during these times, one thing I did do is take all the precautions I could to ease my anxiety. ",
+        "Yeah. That's looking good.  Do u have any idea about side effects of the vaccine, Is it safe for kids? Are you working in frontline?",
+        "I am unsure at the moment. As the weeks continue I am sure we will hear more about the side effects. How are you coping during these times? ",
+        "I am remotely working. I never go outside unnecessarily.",
+        "I am not. Are you? I am very appreciative of those front line workers, I often think about how hard it might be to be in their position.",
+        "Definitely."
+    ],
+    "situation": "Covid 20 is now in situation.This makes me fear.We couldnt predict our future.",
+    "speakers": [
+        "seeker",
+        "supporter",
+        "seeker",
+        "supporter",
+        "seeker",
+        "supporter",
+        "seeker",
+        "supporter",
+        "seeker",
+        "supporter",
+        "seeker",
+        "supporter",
+        "seeker"
+    ],
+    "responses": {},
+    "prompts": {}
+}

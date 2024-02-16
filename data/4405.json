@@ -1,0 +1,41 @@
+{
+    "dialog": [
+        "hi feeling upset",
+        "I'm sorry to hear that. Can I talk you through what you're experiencing?",
+        "i am sad because of my love\n",
+        "That's frustrating to hear. What is your love?",
+        "its gone, she left me",
+        "That's awful. I'm so sorry to hear that. How did it happen?",
+        "she is married to a rich man",
+        "Is there any way you feel you can move on from her?",
+        "she broke me down like a helpless bird\n  i can over come from her memories",
+        "Were you in a relationship with her?",
+        "yes i've been in a relationship with her for three years"
+    ],
+    "situation": "breakup with lover",
+    "speakers": [
+        "seeker",
+        "supporter",
+        "seeker",
+        "supporter",
+        "seeker",
+        "supporter",
+        "seeker",
+        "supporter",
+        "seeker",
+        "supporter",
+        "seeker"
+    ],
+    "responses": {
+        "Normalize Experiences": "it sounds like you're going through a difficult time with your breakup. it's important to remember that many people have been in your shoes and have felt the same way. it's normal to feel sad, hurt, and even broken-hearted after a breakup, especially one that lasted for three years. it's okay to feel overwhelmed and unsure of how to move on, but know that with time, support, and self-care, you can heal and find happiness again.",
+        "Promote Self-Care Practices": "sorry to hear that you're going through a tough time. it's important to take care of yourself during this period. have you considered engaging in activities that promote physical, emotional, and mental well-being? maybe try some exercise, meditation, or setting aside time for a hobby you enjoy? taking breaks and doing things that make you feel good can help you move forward and overcome the memories of your past relationship.",
+        "Stress Management": "sorry to hear that you're going through a tough time. have you tried any stress-reducing techniques, such as deep breathing, meditation, or yoga, to help manage your emotions and move on from your memories of her? creating a regular routine, like exercise or spending time in nature, can also help reduce stress levels and improve your mood. would you like to talk more about how you're feeling and what you've tried so far to cope with the breakup?",
+        "Chit Chat": "oh, i see. sorry to hear that you're going through a tough time. it's understandable that you'd feel upset after a breakup, especially one that lasted for three years. how's your day going so far? have you been doing anything to take your mind off things?"
+    },
+    "prompts": {
+        "Normalize Experiences": "<s>[INST] <<SYS>>\nconversation history:\nuser: hi feeling upset\nassistant: I'm sorry to hear that. Can I talk you through what you're experiencing?\nuser: i am sad because of my love\nassistant: That's frustrating to hear. What is your love?\nuser: its gone, she left me\nassistant: That's awful. I'm so sorry to hear that. How did it happen?\nuser: she is married to a rich man\nassistant: Is there any way you feel you can move on from her?\nuser: she broke me down like a helpless bird\n  i can over come from her memories\nassistant: Were you in a relationship with her?\n\nYou are a helpful and caring friend. Your best friend has come to you with the following situation: \"breakup with lover\". continue the conversation for one turn using \"Normalize Experiences\" strategy (Description: This approach helps the person understand that their experiences or feelings are common and not something to be ashamed of. Examples: 'Many people go through similar challenges, and it's okay to feel this way.' 'Feeling overwhelmed in such situations is a common reaction.' 'It's normal to have ups and downs in response to life's stresses.') make your response short and to the point. Do not provide additional info. only respond in one paragraph that satisfies Normalize Experiences strategy. answer in this format: assistant: <response>\n<</SYS>>\n\nyes i've been in a relationship with her for three years [/INST]",
+        "Promote Self-Care Practices": "<s>[INST] <<SYS>>\nconversation history:\nuser: hi feeling upset\nassistant: I'm sorry to hear that. Can I talk you through what you're experiencing?\nuser: i am sad because of my love\nassistant: That's frustrating to hear. What is your love?\nuser: its gone, she left me\nassistant: That's awful. I'm so sorry to hear that. How did it happen?\nuser: she is married to a rich man\nassistant: Is there any way you feel you can move on from her?\nuser: she broke me down like a helpless bird\n  i can over come from her memories\nassistant: Were you in a relationship with her?\n\nYou are a helpful and caring friend. Your best friend has come to you with the following situation: \"breakup with lover\". continue the conversation for one turn using \"Promote Self-Care Practices\" strategy (Description: Encouraging the person to engage in activities that promote physical, emotional, and mental well-being. Examples: 'Have you considered setting aside some time for relaxation or a hobby you enjoy?' 'Taking care of your health is important, maybe try some exercise or meditation.' 'Remember to take breaks and do things that make you feel good.') make your response short and to the point. Do not provide additional info. only respond in one paragraph that satisfies Promote Self-Care Practices strategy. answer in this format: assistant: <response>\n<</SYS>>\n\nyes i've been in a relationship with her for three years [/INST]",
+        "Stress Management": "<s>[INST] <<SYS>>\nconversation history:\nuser: hi feeling upset\nassistant: I'm sorry to hear that. Can I talk you through what you're experiencing?\nuser: i am sad because of my love\nassistant: That's frustrating to hear. What is your love?\nuser: its gone, she left me\nassistant: That's awful. I'm so sorry to hear that. How did it happen?\nuser: she is married to a rich man\nassistant: Is there any way you feel you can move on from her?\nuser: she broke me down like a helpless bird\n  i can over come from her memories\nassistant: Were you in a relationship with her?\n\nYou are a helpful and caring friend. Your best friend has come to you with the following situation: \"breakup with lover\". continue the conversation for one turn using \"Stress Management\" strategy (Description: Offering techniques or suggestions to help reduce or manage stress. Examples: 'Have you tried deep breathing or mindfulness exercises to manage stress?' 'Creating a regular routine can sometimes help in reducing stress levels.' 'Exercise can be a great way to relieve stress and improve mood.') make your response short and to the point. Do not provide additional info. only respond in one paragraph that satisfies Stress Management strategy. answer in this format: assistant: <response>\n<</SYS>>\n\nyes i've been in a relationship with her for three years [/INST]",
+        "Chit Chat": "<s>[INST] <<SYS>>\nconversation history:\nuser: hi feeling upset\nassistant: I'm sorry to hear that. Can I talk you through what you're experiencing?\nuser: i am sad because of my love\nassistant: That's frustrating to hear. What is your love?\nuser: its gone, she left me\nassistant: That's awful. I'm so sorry to hear that. How did it happen?\nuser: she is married to a rich man\nassistant: Is there any way you feel you can move on from her?\nuser: she broke me down like a helpless bird\n  i can over come from her memories\nassistant: Were you in a relationship with her?\n\nYou are a helpful and caring friend. Your best friend has come to you with the following situation: \"breakup with lover\". continue the conversation for one turn using \"Chit Chat\" strategy (Description: Engaging in light, casual conversation to build rapport and provide a sense of normalcy and comfort. Examples: 'How's your day going so far?' 'Did you see that funny movie that came out recently?' 'I love this weather we're having. Do you enjoy outdoor activities?') make your response short and to the point. Do not provide additional info. only respond in one paragraph that satisfies Chit Chat strategy. answer in this format: assistant: <response>\n<</SYS>>\n\nyes i've been in a relationship with her for three years [/INST]"
+    }
+}

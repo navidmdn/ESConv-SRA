@@ -1,0 +1,25 @@
+{
+    "dialog": [
+        "Hi\n",
+        "How are things going?",
+        "Not good. I'm depressed.\n",
+        "Is there anything in particular that has been bothering you recently?",
+        "I don't have enough money to buy my 5 kids X-mas gifts.\n Hello?\n Are you still here?\n"
+    ],
+    "situation": "I don't have enough money to buy my kids christmas gifts.",
+    "speakers": [
+        "seeker",
+        "supporter",
+        "seeker",
+        "supporter",
+        "seeker"
+    ],
+    "responses": {
+        "Share Information": "sorry to hear that you're struggling to afford christmas gifts for your kids. have you considered reaching out to local charities or non-profit organizations that provide assistance with holiday gifts? many organizations offer programs that help families in need during the holiday season. additionally, you can also try reaching out to your community or religious organization for support. they may be able to provide you with resources or referrals to help you obtain gifts for your children.",
+        "Suggest Options": "hi there! i'm still here, and i understand that you're struggling to afford christmas gifts for your kids. have you considered reaching out to local charities or non-profit organizations that may be able to provide some assistance? additionally, you could try setting up a crowdfunding campaign or a fundraising event in your community to raise funds for the gifts. you could also consider reaching out to family members or close friends to see if they can offer any financial support. lastly, you could look into alternative gift ideas that don't necessarily require a lot of money, such as homemade gifts or experiences that your kids can enjoy."
+    },
+    "prompts": {
+        "Share Information": "<s>[INST] <<SYS>>\nconversation history:\nuser: Hi\nassistant: How are things going?\nuser: Not good. I'm depressed.\nassistant: Is there anything in particular that has been bothering you recently?\n\nYou are a helpful and caring friend. Your best friend has come to you with the following situation: \"I don't have enough money to buy my kids christmas gifts.\". continue the conversation for one turn using \"Share Information\" strategy (Description: Providing factual information or resources that might be helpful in understanding or coping with a situation. Examples: 'I read an article about coping strategies that might be useful for you.' 'There are some great books that offer insights into managing these feelings.' 'I can share some websites that provide helpful tips on stress management.') make your response short and to the point. Do not provide additional info. only respond in one paragraph that satisfies Share Information strategy. answer in this format: assistant: <response>\n<</SYS>>\n\nI don't have enough money to buy my 5 kids X-mas gifts.\n Hello?\n Are you still here? [/INST]",
+        "Suggest Options": "<s>[INST] <<SYS>>\nconversation history:\nuser: Hi\nassistant: How are things going?\nuser: Not good. I'm depressed.\nassistant: Is there anything in particular that has been bothering you recently?\n\nYou are a helpful and caring friend. Your best friend has come to you with the following situation: \"I don't have enough money to buy my kids christmas gifts.\". continue the conversation for one turn using \"Suggest Options\" strategy (Description: Presenting various possibilities or alternatives that the person might consider in their situation. Examples: 'One option might be to talk to someone you trust about what you're going through.' 'Have you thought about joining a support group for this issue?' 'Maybe trying a new approach to this problem could yield different results.') make your response short and to the point. Do not provide additional info. only respond in one paragraph that satisfies Suggest Options strategy. answer in this format: assistant: <response>\n<</SYS>>\n\nI don't have enough money to buy my 5 kids X-mas gifts.\n Hello?\n Are you still here? [/INST]"
+    }
+}
