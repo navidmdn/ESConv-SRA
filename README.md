@@ -33,3 +33,20 @@ bash llama70b.sh
 
 This will generate the sampled data collections for the experiments in the paper. The rest of the 
 analysis will be done using `prompting/strategy_following_comparison.ipynb` notebook.
+
+## Visualizing attentions
+
+We also provide the code to visualize the attention that each span of the prompt receives. You can run the following
+Flask app to visualize the attention weights:
+
+```sh
+cd attention_visualizer
+python app.py --data_dir /path/to/generated/pickle/files/from/previous/step
+```
+
+Make sure you provide a directory with pickle files in the format we produce in the previous section
+using `prompting/multiple_strategy_continuation.py`. You will see a similar html page to the following
+in which you can select a span and visualize the weights on the prompt text. Also you will get top
+20 tokens that the model attends to on the left side of the page:
+
+![attention highlighting](attention_visualizer/static/demo.png)
