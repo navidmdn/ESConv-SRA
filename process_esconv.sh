@@ -1,0 +1,1 @@
+PYTHONPATH=. python esconv/preprocess_raw_data.py --data_path esconv/ESConv.json --output_dir esconv/

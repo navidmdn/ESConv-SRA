@@ -11,6 +11,7 @@ import torch
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 print("Encoding on device:", DEVICE)
 
+
 def encode_responses(model, responses: List[str]):
     return model.encode(responses, convert_to_tensor=False, batch_size=32, show_progress_bar=True, device=DEVICE)
 

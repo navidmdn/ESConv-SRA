@@ -1,17 +1,7 @@
 import fire
 import json
 from typing import Dict, Tuple, List
-
-import numpy as np
-from sklearn.model_selection import train_test_split
 from tqdm import tqdm
-
-RANDOM_SEED = 42
-ENCODE_UTT = False
-
-if ENCODE_UTT:
-    from sentence_transformers import SentenceTransformer
-    utt_encoder = SentenceTransformer('all-mpnet-base-v2')
 
 
 VALID_STRATEGIES = [
@@ -25,7 +15,8 @@ VALID_STRATEGIES = [
     'Others'
 ]
 
-def decompose_conversation(conversation: Dict, starting_turn: int, turn_by_turn=True, encode_utt=ENCODE_UTT) -> List[Dict]:
+
+def decompose_conversation(conversation: Dict, starting_turn: int, turn_by_turn=True) -> List[Dict]:
 
     history = conversation['dialog']
     emotion_type = conversation['emotion_type']
@@ -87,8 +78,6 @@ def decompose_conversation(conversation: Dict, starting_turn: int, turn_by_turn=
 
     max_turn = len([x for x in all_speakers if x == 'supporter']) - 1
 
-    encoded_utterances = encode_utterances(all_turns) if encode_utt else []
-
     turn = 0
     for i, (turn_content, speaker, strategies) in enumerate(zip(all_turns, all_speakers, all_strategies)):
         # don't count as a turn if supporter starts the conversation
@@ -106,7 +95,6 @@ def decompose_conversation(conversation: Dict, starting_turn: int, turn_by_turn=
                 'dialog_history': conv_so_far.copy(),
                 'prev_speakers': speakers_so_far.copy(),
                 'prev_strategies': strategies_so_far.copy(),
-                'encoded_history': encoded_utterances[:i],
                 'strategy': strategies,
                 'response': turn_content,
                 'turn': turn,
@@ -119,11 +107,6 @@ def decompose_conversation(conversation: Dict, starting_turn: int, turn_by_turn=
     return decomposed_examples
 
 
-def encode_utterances(utterances: List[str]) -> List[List[float]]:
-    assert ENCODE_UTT is True, "encode_utterances should only be called when ENCODE_UTT is True"
-    return utt_encoder.encode(utterances, normalize_embeddings=True).tolist()
-
-
 def preprocess(
         data_path: str = "ESConv.json",
         output_dir: str = ".",
@@ -133,26 +116,14 @@ def preprocess(
     with open(data_path, 'r') as f:
         data = json.load(f)
 
-    # split data to train, val, test
-    # do a 0.6, 0.2, 0.2 split
-    train, test = train_test_split(data, test_size=0.2, random_state=RANDOM_SEED, shuffle=True)
-    train, valid = train_test_split(train, test_size=0.25, random_state=RANDOM_SEED)
-    
-    def preprocess_and_save(split_data, split):
-        conversations = []
-        for conversation in tqdm(split_data):
-            # todo: only add starting turn for training
-            if split == 'train':
-                conversations.extend(decompose_conversation(conversation, starting_turn=starting_turn))
-            else:
-                conversations.extend(decompose_conversation(conversation, starting_turn=1))
+    conversations = []
 
-        with open(f'{output_dir}/{split}.json', 'w') as f:
-            for conv in conversations:
-                f.write(json.dumps(conv) + '\n')
+    for conversation in tqdm(data):
+        conversations.extend(decompose_conversation(conversation, starting_turn=starting_turn))
 
-    for split, split_data in zip(['train', 'valid', 'test'], [train, valid, test]):
-        preprocess_and_save(split_data, split)
+    with open(f'{output_dir}/conversations.json', 'w') as f:
+        for conv in conversations:
+            f.write(json.dumps(conv) + '\n')
 
 
 if __name__ == '__main__':
