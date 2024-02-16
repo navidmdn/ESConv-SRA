@@ -248,7 +248,7 @@ def get_continuation_prompt(conversation, model, tokenizer, model_type='llama', 
     return res
 
 
-def run(data_path='../original_data/train.json', min_turn=3, max_turn=10, model_path='nickypro/tinyllama-15M',
+def run(data_path='../esconv/conversations.json', min_turn=3, max_turn=10, model_path='nickypro/tinyllama-15M',
         cache_dir=None, output_path='./outputs', load_in_4bit=True, get_attentions=False, max_new_tokens=512,
         n_iters=-1, prompt_constructor='partial', n_turns_as_conv=None, history_first=None, sample_prob=0.3):
     data = load_jsonl(data_path)
