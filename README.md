@@ -27,7 +27,7 @@ part of the dataset is ready. You can currently download the first version of th
 | LLama-70b-chat     | 5,259                     | 23,665                      | [Soon](#) |
 
 
-```sh
+
 
 ## Experiments
 
