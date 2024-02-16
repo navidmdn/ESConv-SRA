@@ -13,6 +13,22 @@ called `conversations.json`. You can run the script with the following command:
 bash process_esconv.sh
 ```
 
+Then you can postprocess the generated responses using `prompting/postprocess.py` script. A sample of the generated data
+is available in `data/` directory. Each file contains one incomplete conversation and a few continuations using 
+different strategies. Along with this information we also provide the exact prompt that we used to generate each continuation.
+
+We are on the mission to complete this dataset and make it available for the public. We will update this section once each
+part of the dataset is ready. You can currently download the first version of the dataset from [this link](https://drive.google.com/file/d/11UOExWowxcQfi168zGJ5M2AJmK9J_MaV/view?usp=sharing)
+
+| Model Used | Number of Conversations | Number of Continuations | Download Link |
+|------------|-------------------------|-------------------------|---------------|
+| LLama-7b-chat    | 5,657                     | 25,456                      | [Soon](#) |
+| LLama-13b-chat    | 5,657                     | 25,456                      | [Soon](#) |
+| LLama-70b-chat     | 5,259                     | 23,665                      | [Soon](#) |
+
+
+```sh
+
 ## Experiments
 
 For our experiments we use LLaMa v2 chat models with 4bit quantization. You can follow the instruction in the following
