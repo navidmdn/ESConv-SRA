@@ -1,0 +1,91 @@
+<View className="root">
+  <Style>
+    .root {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto',
+        sans-serif;
+      line-height: 1.6;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .prompt {
+      padding: 20px;
+      background-color: #E1E154;
+      color: #ffffff;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .metadata {
+      padding: 20px;
+      background-color: #E18554;
+      color: #ffffff;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+
+    .answers {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .answer-box {
+      flex-basis: 49%;
+      padding: 20px;
+      background-color: rgba(44, 62, 80, 0.9);
+      color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .answer-box p {
+      word-wrap: break-word;
+    }
+
+    .answer-box:hover {
+      background-color: rgba(52, 73, 94, 0.9);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lsf-richtext__line:hover {
+      background: unset;
+    }
+
+    .answer-box .lsf-object {
+      padding: 20px
+    }
+  </Style>
+  <View className="container">
+    <View className="metadata">
+      <HyperText name="metadata" value="$metadata"/>
+    </View>
+    <View className="prompt">
+      <HyperText name="prompt" value="$history"/>
+    </View>
+    <View className="answers">
+      <Pairwise name="comparison" toName="answer1,answer2" selectionStyle="background-color: #27ae60; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2); border: 2px solid #2ecc71; cursor: pointer; transition: all 0.3s ease;"/>
+      <View className="answer-box">
+        <Text name="answer1" value="$model1_response"/>
+      </View>
+      <View className="answer-box">
+        <Text name="answer2" value="$model2_response"/>
+      </View>
+    </View>
+  </View>
+</View>

@@ -1,0 +1,98 @@
+<View className="root">
+  <Style>
+    .root {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .prompt, .metadata {
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .prompt {
+      background-color: #E1E154;
+      color: #ffffff;
+    }
+
+    .metadata {
+      background-color: #E18554;
+      color: #ffffff;
+    }
+
+    .answers {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .answer-box {
+      flex-basis: 49%;
+      padding: 20px;
+      background-color: rgba(44, 62, 80, 0.9);
+      color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .answer-box p {
+      word-wrap: break-word;
+    }
+
+    .answer-box:hover {
+      background-color: rgba(52, 73, 94, 0.9);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .choices-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  </Style>
+  <View className="container">
+    <View className="metadata">
+      <HyperText name="metadata" value="$metadata"/>
+    </View>
+    <View className="prompt">
+      <HyperText name="prompt" value="$history"/>
+    </View>
+    <View className="answers">
+      <View className="answer-box">
+        <Text name="answer1" value="$model1_response"/>
+      </View>
+      <View className="answer-box">
+        <Text name="answer2" value="$model2_response"/>
+      </View>
+    </View>
+    <View className="choices-container">
+      <Choices name="model-preference" toName="prompt" orientation="horizontal" required="true" showInLine="true">
+        <Choice value="-4"/>
+        <Choice value="-3"/>
+        <Choice value="-2"/>
+        <Choice value="-1"/>
+        <Choice value="0"/>
+        <Choice value="1"/>
+        <Choice value="2"/>
+        <Choice value="3"/>
+        <Choice value="4"/>
+      </Choices>
+    </View>
+  </View>
+</View>
