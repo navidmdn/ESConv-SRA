@@ -33,18 +33,20 @@ def load_and_postprocess_data(response_file: str) -> Dict:
     return data
 
 
-def run(data_dir='outputs/exp3_70b_c1_hf_partial', output_dir='../data/'):
-    os.makedirs(output_dir, exist_ok=True)
+def run(data_dir='outputs/exp3_70b_c1_hf_partial', output_path='../data/output.json'):
+    result = []
 
     print("retrieving and postprocessing responses...")
     paths = glob.glob(os.path.join(data_dir, '*.json'))
     for file in tqdm(paths):
         data = load_and_postprocess_data(file)
+        result.append(data)
 
-        output_path = file.split('/')[-1]
-        output_path = os.path.join(output_dir, output_path)
-        with open(output_path, 'w') as f:
-            json.dump(data, f, indent=4)
+    print(f"total conversations: {len(result)}")
+    print(f"total continuations: {sum([len(data['responses']) for data in result])}")
+
+    with open(output_path, 'w') as f:
+        json.dump(result, f, indent=4)
 
 
 if __name__ == '__main__':
