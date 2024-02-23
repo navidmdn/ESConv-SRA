@@ -24,7 +24,7 @@ part of the dataset is ready. You can currently download the first version of th
 |------------|-------------------------|-------------------------|---------------|
 | LLama-7b-chat    | 9,354                    | 41,994                      | [Download](https://drive.google.com/file/d/1D4d4G8KJgtjqbkfhtYpyicwgW8rzX2Kq/view?usp=sharing) |
 | LLama-13b-chat    | 9,354                     | 41,994                     | [Download](https://drive.google.com/file/d/1p8-Gm6zvBd0rsZfLatFL7YbvywDyYFV-/view?usp=sharing) |
-| LLama-70b-chat     | 5,259                     | 23,665                      | [Soon](#) |
+| LLama-70b-chat     | 5,479                     | 24,760                      | [Download](https://drive.google.com/file/d/14IsKwt4B8eGflLEsSDlboIAZlstYS95i/view?usp=sharing) |
 
 
 
