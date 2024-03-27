@@ -335,6 +335,7 @@ def run(data_path='../esconv/conversations.json', min_turn=3, max_turn=10, model
 
         rand_id = random.randint(0, len(data)-1)
         if os.path.exists(os.path.join(output_path, f'{rand_id}.json')):
+            i += 1
             continue
 
         conversation = data[rand_id]
