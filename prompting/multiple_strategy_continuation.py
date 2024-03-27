@@ -131,11 +131,52 @@ def convert_to_llama2_chat_partial_conv_format(sys_msg: str, conversations: List
     formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False)
     return formatted_prompt
 
+def convert_to_mistral_chat_partial_conv_format(sys_msg: str, conversations: List[str], tokenizer,
+                                               n_turns_as_conv=3, history_first=True, **kwargs) -> str:
+    if n_turns_as_conv % 2 != 1:
+        raise ValueError("n_turns_as_conv should be odd number")
+
+    conv_messages = []
+    for i in range(max(len(conversations) - n_turns_as_conv, 0), len(conversations) - 1, 2):
+        conv_messages.append({'role': 'user', 'content': conversations[i].strip()})
+        conv_messages.append({'role': 'assistant', 'content': conversations[i + 1].strip()})
+    conv_messages.append({'role': 'user', 'content': conversations[-1].strip()})
+
+    if len(conversations) > n_turns_as_conv:
+        conversations = conversations[:-n_turns_as_conv]
+
+    conv_history_str = "conversation history:\n"
+    for i in range(0, len(conversations) - 1, 2):
+        conv_history_str += "user: " + conversations[i].strip() + "\n"
+        conv_history_str += "assistant: " + conversations[i + 1].strip() + "\n"
+
+    if history_first:
+        sys_msg = f"{conv_history_str}\n{sys_msg.strip()}"
+    else:
+        sys_msg = f"{sys_msg.strip()}\n{conv_history_str}"
+
+    assert conv_messages[0]['role'] == 'user'
+    conv_messages[0]['content'] = f"{sys_msg}\n\n{conv_messages[0]['content']}"
+
+    formatted_prompt = tokenizer.apply_chat_template(conv_messages, tokenize=False)
+    return formatted_prompt
+
 
 def convert_to_llama2_chat_format(sys_msg: str, conversations: List[str], tokenizer, **kwargs) -> str:
     messages = [{'role': 'system', 'content': sys_msg}]
     for i in range(0, len(conversations) - 1, 2):
         messages.append({'role': 'user', 'content': conversations[i]})
+        messages.append({'role': 'assistant', 'content': conversations[i + 1]})
+    messages.append({'role': 'user', 'content': conversations[-1]})
+
+    formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False)
+    return formatted_prompt
+
+
+def convert_to_mistral_chat_format(sys_msg: str, conversations: List[str], tokenizer, **kwargs) -> str:
+    messages = []
+    for i in range(0, len(conversations) - 1, 2):
+        messages.append({'role': 'user', 'content': f"{sys_msg}\n\n{conversations[i]}"})
         messages.append({'role': 'assistant', 'content': conversations[i + 1]})
     messages.append({'role': 'user', 'content': conversations[-1]})
 
@@ -239,6 +280,7 @@ def get_continuation_prompt(conversation, model, tokenizer, model_type='llama', 
         response = outputs.sequences[0][len(input_ids[0]):]
         output_txt = tokenizer.decode(response, skip_special_tokens=True).strip()
         responses[strategy] = output_txt
+        print("\nprompt: ", prompt)
         print(f"\n\nstrategy:\n{strategy}\n\nresponse:\n{output_txt}")
 
     if attentions:
@@ -258,16 +300,28 @@ def run(data_path='../esconv/conversations.json', min_turn=3, max_turn=10, model
     tokenizer.padding_side = 'left'
     tokenizer.pad_token = tokenizer.eos_token
 
-    if prompt_constructor == 'partial':
-        assert n_turns_as_conv is not None
-        assert history_first is not None
-        prompt_constructor_func = convert_to_llama2_chat_partial_conv_format
-    elif prompt_constructor == 'full':
-        prompt_constructor_func = convert_to_llama2_chat_format
-    else:
-        raise ValueError(f"prompt_constructor should be one of ['partial', 'full'], but got {prompt_constructor}")
+    if 'llama' in model_path:
+        if prompt_constructor == 'partial':
+            assert n_turns_as_conv is not None
+            assert history_first is not None
+            prompt_constructor_func = convert_to_llama2_chat_partial_conv_format
+        elif prompt_constructor == 'full':
+            prompt_constructor_func = convert_to_llama2_chat_format
+        else:
+            raise ValueError(f"prompt_constructor should be one of ['partial', 'full'], but got {prompt_constructor}")
 
-    print(f"using prompt constructor: {prompt_constructor}")
+        print(f"using prompt constructor: {prompt_constructor}")
+    elif 'mistral' in model_path:
+        if prompt_constructor == 'partial':
+            assert n_turns_as_conv is not None
+            assert history_first is not None
+            prompt_constructor_func = convert_to_mistral_chat_partial_conv_format
+        elif prompt_constructor == 'full':
+            prompt_constructor_func = convert_to_mistral_chat_format
+        else:
+            raise ValueError(f"prompt_constructor should be one of ['partial', 'full'], but got {prompt_constructor}")
+
+        print(f"using prompt constructor: {prompt_constructor}")
 
     os.makedirs(output_path, exist_ok=True)
 
