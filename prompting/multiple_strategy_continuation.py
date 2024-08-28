@@ -222,6 +222,8 @@ def get_model_and_tokenizer(model_name, cache_dir, load_in_4bit=True):
         device_map=device_map,
         cache_dir=cache_dir,
         torch_dtype=torch_dtype,
+        #todo: make sure flash attention is installed
+        # attn_implementation="flash_attention_2"
     )
 
     return model, tokenizer
@@ -267,9 +269,9 @@ def get_continuation_prompt(conversation, model, tokenizer, model_type='llama', 
         outputs = model.generate(input_ids, do_sample=False,
                                  output_attentions=get_attentions, max_new_tokens=max_new_tokens,
                                  return_dict_in_generate=True)
-
         prompts[strategy] = prompt
 
+        print(outputs.attentions, type(outputs.attentions))
         if get_attentions:
             agg_attentions = [default_aggregate_attention(t).cpu() for t in outputs.attentions]
             # last tokens attentions should be the size of full sequence
