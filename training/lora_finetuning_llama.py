@@ -297,7 +297,7 @@ def training_function(script_args, training_args):
             # modules_to_save = ["lm_head", "embed_tokens"] # add if you want to use the Llama 3 instruct template
         )
 
-    metric = evaluate.load("rouge", cache_dir=script_args.cache_dir)
+    # metric = evaluate.load("rouge", cache_dir=script_args.cache_dir)
 
     def compute_metrics(eval_predictions):
         #todo: do i need to revert it at the end? probably not because the training data is already processed and
@@ -386,7 +386,7 @@ def training_function(script_args, training_args):
         eval_dataset=dev_datasets,
         peft_config=peft_config,
         tokenizer=tokenizer,
-        compute_metrics=compute_metrics,
+        # compute_metrics=compute_metrics,
         max_seq_length=4096,
         callbacks=[EarlyStoppingCallback(early_stopping_patience=10)],
         packing=False,

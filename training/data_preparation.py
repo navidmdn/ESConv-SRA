@@ -6,7 +6,7 @@ from tqdm import tqdm
 from prompting.llama_prompt import modified_extes_support_strategies
 
 
-def build_sys_msg_from_strategy(strategy: str, situation: str) -> str:
+def build_sys_msg_from_strategy_and_situation(strategy: str, situation: str) -> str:
     description = modified_extes_support_strategies[strategy]
 
     return """You are a helpful and caring AI which is an expert in emotional support.\
@@ -23,7 +23,7 @@ def convert_conversations_to_chat_format(data: List[Dict]) -> List[Dict]:
         messages = []
         speakers = ['user' if s == 'seeker' else 'assistant' for s in ex['speakers']]
         turns = [t.strip() for t in ex['dialog']]
-
+        situation = ex['situation']
         for s, t in zip(speakers, turns):
             messages.append({'role': s, 'content': t})
 
@@ -31,16 +31,18 @@ def convert_conversations_to_chat_format(data: List[Dict]) -> List[Dict]:
             cur_msgs = copy(messages)
             cur_msgs.append({'role': 'assistant', 'content': resp})
 
-            sys_msg = build_sys_msg_from_strategy(label)
+            sys_msg = build_sys_msg_from_strategy_and_situation(label, situation)
             cur_msgs.insert(0, {'role': 'system', 'content': sys_msg})
-            processed_convs.append({'messages': cur_msgs})
+            processed_convs.append({'messages': cur_msgs, 'strategy': label})
 
     return processed_convs
 
 def run(extended_ds_path: str, output_path: str) -> None:
 
+    data = []
     with open(extended_ds_path, 'r') as f:
-        data = json.load(f)
+        for line in f:
+            data.append(json.loads(line))
 
     print("total number of conversations: ", len(data))
     #todo: add id and split data across conversations
