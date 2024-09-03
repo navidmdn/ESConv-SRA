@@ -60,7 +60,7 @@ def convert_to_llama_chat_partial_conv_format(messages: List[Dict], tokenizer,
         prompt[0] = {'role': 'system', 'content': updated_sys_msg}
         prompt = [prompt[0]] + prompt[-n_turns_as_conv:]
 
-    formatted_prompt = tokenizer.apply_chat_template(prompt, tokenize=False)
+    formatted_prompt = tokenizer.apply_chat_template(prompt, tokenize=False, add_generation_prompt=True)
     return formatted_prompt
 
 

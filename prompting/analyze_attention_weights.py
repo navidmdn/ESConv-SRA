@@ -112,6 +112,11 @@ def get_average_attention_over_sequence(aggregated_attention, token_ids: torch.T
     attn_m = heterogenous_stack(aggregated_attention)
 
     beg_idx = find_sublist_start(token_ids.tolist(), seq_token_ids)
+    #
+    # print("beg_idx: ", beg_idx)
+    # print("sequence: ", sequence)
+    # print("seq_token_ids: ", seq_token_ids)
+    # print("token_ids: ", token_ids)
 
     if beg_idx == -1:
         raise ValueError(f"sequence {seq_token_ids} not found in reference token_ids: {token_ids}")
