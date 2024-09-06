@@ -26,8 +26,8 @@ def process_response(response: str) -> str:
     else:
         return
 
-def run(model1_response_file: str, model2_response_file: str, evaluator_prompt_file: str = "strategy_following_comparison.txt",
-        response_col: str = 'model_response', evaluator_llm_name: str = 'gpt-3.5-turbo',
+def run(model1_response_file: str, model2_response_file: str, evaluator_prompt_file: str = "strategy_following_comparison_judge_prompt.txt",
+        response_col: str = 'model_response', evaluator_llm_name: str = 'gpt-4o',
         result_dir: str = 'data/', max_examples: int = -1):
 
     llm = ChatOpenAI(
