@@ -117,7 +117,7 @@ def generate_resp(model, tokenizer, examples, device, base_model_type, baseline_
     terminators = [
         tokenizer.eos_token_id,
         #todo: add whatever token is necessary
-        # tokenizer.convert_tokens_to_ids("<|eot_id|>")
+        tokenizer.convert_tokens_to_ids("<|eot_id|>")
     ]
 
     input_ids = inputs['input_ids'].to(device)
@@ -194,7 +194,7 @@ def generate_responses(test_path: str = 'data/test_processed.json', model_path: 
         model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.bfloat16, cache_dir=cache_dir)
         model = model.to(device)
 
-    lora_tokenizer = AutoTokenizer.from_pretrained(model_path)
+    lora_tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
     lora_tokenizer.padding_side = 'left'
     lora_tokenizer.pad_token = lora_tokenizer.eos_token
     lora_tokenizer.pad_token_id = lora_tokenizer.convert_tokens_to_ids(lora_tokenizer.eos_token)
