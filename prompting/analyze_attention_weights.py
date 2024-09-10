@@ -83,6 +83,36 @@ def find_sublist_start(larger: List[int], smaller: List[int]):
     return -1
 
 
+def longest_common_subarray_in_first(arr1, arr2):
+    n, m = len(arr1), len(arr2)
+    # Create a 2D table to store lengths of longest common suffixes of substrings.
+    dp = [[0] * (m + 1) for _ in range(n + 1)]
+
+    # Length of the longest common subarray
+    longest_length = 0
+
+    # To store the ending index of the longest common subarray in arr1
+    end_index_arr1 = -1
+
+    # Building the DP table
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            if arr1[i - 1] == arr2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+                if dp[i][j] > longest_length:
+                    longest_length = dp[i][j]
+                    end_index_arr1 = i - 1
+
+    # If no common subarray found, return None
+    if longest_length == 0:
+        return None
+
+    # Calculate the start index based on the length of the longest common subarray
+    start_index_arr1 = end_index_arr1 - longest_length + 1
+
+    return (start_index_arr1, end_index_arr1)
+
+
 def heterogenous_stack(vecs):
     '''Pad vectors with zeros then stack'''
     max_length = max(v.shape[0] for v in vecs)
@@ -98,7 +128,7 @@ def get_average_attention_over_sequence(aggregated_attention, token_ids: torch.T
     seq_token_ids = tokenizer(sequence, add_special_tokens=False, return_tensors='pt')['input_ids'][0].tolist()
 
     # to avoid initial token mismatch due to space or newline
-    seq_token_ids = seq_token_ids[1:]
+    # seq_token_ids = seq_token_ids[2:]
 
     # prompt_token_ids = token_ids[:len(token_ids)-len(aggregated_attention)]
 
@@ -111,8 +141,10 @@ def get_average_attention_over_sequence(aggregated_attention, token_ids: torch.T
     # ] + aggregated_attention)
     attn_m = heterogenous_stack(aggregated_attention)
 
-    beg_idx = find_sublist_start(token_ids.tolist(), seq_token_ids)
+    # beg_idx = find_sublist_start(token_ids.tolist(), seq_token_ids)
     #
+    beg_idx, end_idx = longest_common_subarray_in_first(token_ids.tolist(), seq_token_ids)
+
     # print("beg_idx: ", beg_idx)
     # print("sequence: ", sequence)
     # print("seq_token_ids: ", seq_token_ids)
@@ -122,7 +154,7 @@ def get_average_attention_over_sequence(aggregated_attention, token_ids: torch.T
         raise ValueError(f"sequence {seq_token_ids} not found in reference token_ids: {token_ids}")
 
     # avg_attn_score = attn_m[-len(aggregated_attention):, beg_idx:beg_idx+len(seq_token_ids)].mean().item()
-    avg_attn_score = attn_m[:, beg_idx:beg_idx+len(seq_token_ids)].mean().item()
+    avg_attn_score = attn_m[:, beg_idx:end_idx].mean().item()
     return avg_attn_score
 
 
