@@ -3,28 +3,25 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig, LlamaF
 from fire import Fire
 from typing import List, Tuple
 import torch
-from transformers import BitsAndBytesConfig
-from langchain_aws import ChatBedrock
-
 
 
 # todo: add streamer to generation
 def run(model_name_or_path_1='Qwen/Qwen1.5-0.5B-Chat', model_name_or_path_2='meta.llama3-8b-instruct-v1:0',
-        max_new_tokens=512,
+        max_new_tokens=512, cache_dir=None,
         temperature=0.7, top_p=0.9, num_return_sequences=1, do_sample=True, num_beams=1, share=False):
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-    model_1 = AutoModelForCausalLM.from_pretrained(model_name_or_path_1)
+    model_1 = AutoModelForCausalLM.from_pretrained(model_name_or_path_1, cache_dir=cache_dir)
     model_1 = model_1.to(device)
     model_1.eval()
-    tokenizer_1 = AutoTokenizer.from_pretrained(model_name_or_path_1)
+    tokenizer_1 = AutoTokenizer.from_pretrained(model_name_or_path_1, cache_dir=cache_dir)
 
-    model_2 = AutoModelForCausalLM.from_pretrained(model_name_or_path_2)
+    model_2 = AutoModelForCausalLM.from_pretrained(model_name_or_path_2, cache_dir=cache_dir)
     model_2 = model_2.to(device)
     model_2.eval()
-    tokenizer_2 = AutoTokenizer.from_pretrained(model_name_or_path_2)
+    tokenizer_2 = AutoTokenizer.from_pretrained(model_name_or_path_2, cache_dir=cache_dir)
 
 
     def build_input_from_chat_history(chat_history: List[Tuple], msg: str):
