@@ -3,7 +3,7 @@
 This repository contains the code and the data for the paper "Steering Conversational Large Language Models for Long
 Emotional Support Conversations"
 
-## Data
+## Synthetic Strategy-Conditioned Data
 
 The original ESConv dataset is available under `esconv/` directory. You can run the `process_esconv.sh` to
 convert the data into a format that we use in our experiments. It will create a json file inside the same folder
@@ -27,6 +27,9 @@ part of the dataset is ready. You can currently download the first version of th
 | LLama-70b-chat     | 1,297                     | 24,760                      | [Download](https://drive.google.com/file/d/14IsKwt4B8eGflLEsSDlboIAZlstYS95i/view?usp=sharing) |
 
 
+## Training
+
+All of the scripts and experiments for training our proposed models can be found in `training/` folder. You can use `prepare_classification_data.py` and `data_preparation.py` files to preprocess the synthetic data for building strategy classifier and fine-tuning Llama models. Also, `lora_finetuning_llama.py` and `train_strategy_classifier.py` can be used to train these models afterwards. A sample bash script to run the lora fine-tuning can be found in `lora_finetuning_llama.sh`.
 
 
 ## Experiments
