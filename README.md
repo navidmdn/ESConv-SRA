@@ -1,4 +1,4 @@
-# ESConv-SRA
+<img width="1224" alt="image" src="https://github.com/user-attachments/assets/a6cc59ee-dcce-427f-a5d3-5eab31038e07"># ESConv-SRA
 
 This repository contains the code and the data for the paper "Steering Conversational Large Language Models for Long
 Emotional Support Conversations"
@@ -31,6 +31,19 @@ part of the dataset is ready. You can currently download the first version of th
 
 All of the scripts and experiments for training our proposed models can be found in `training/` folder. You can use `prepare_classification_data.py` and `data_preparation.py` files to preprocess the synthetic data for building strategy classifier and fine-tuning Llama models. Also, `lora_finetuning_llama.py` and `train_strategy_classifier.py` can be used to train these models afterwards. A sample bash script to run the lora fine-tuning can be found in `lora_finetuning_llama.sh`.
 
+## Comparison
+
+You can compare two models with standard prompting on strategy adherence. Simply run the following command to load the two models and compare them side by side:
+
+```
+python head2head_livechat.py\
+ --model_name_or_path_1 'meta-llama/Meta-Llama-3-8B-Instruct'\
+ --model_name_or_path_2 'outputs/your_llama3_lora_finetuned_model'\
+```
+
+You'll get a UI as the image below and you can choose a strategy at each turn to respond with.
+
+<img width="1224" alt="ui" src="https://github.com/user-attachments/assets/7e698d91-c4bc-42ce-b2d4-d31091bec876">
 
 ## Experiments
 
@@ -62,6 +75,7 @@ Flask app to visualize the attention weights:
 cd attention_visualizer
 python app.py --data_dir /path/to/generated/pickle/files/from/previous/step
 ```
+<img width="1224" alt="ui" src="https://github.com/user-attachments/assets/67d19ede-f002-47ac-bc6c-e6944edc934b">
 
 Make sure you provide a directory with pickle files in the format we produce in the previous section
 using `prompting/multiple_strategy_continuation.py`. You will see a similar html page to the following
