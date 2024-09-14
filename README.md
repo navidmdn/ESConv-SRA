@@ -1,4 +1,3 @@
-<img width="1224" alt="image" src="https://github.com/user-attachments/assets/a6cc59ee-dcce-427f-a5d3-5eab31038e07"># ESConv-SRA
 
 This repository contains the code and the data for the paper "Steering Conversational Large Language Models for Long
 Emotional Support Conversations"
