@@ -22,9 +22,9 @@ part of the dataset is ready. You can currently download the first version of th
 
 | Model Used | Number of Conversations | Number of Continuations | Download Link |
 |------------|-------------------------|-------------------------|---------------|
-| LLama-7b-chat    | 9,354                    | 41,994                      | [Download](https://drive.google.com/file/d/1D4d4G8KJgtjqbkfhtYpyicwgW8rzX2Kq/view?usp=sharing) |
-| LLama-13b-chat    | 9,354                     | 41,994                     | [Download](https://drive.google.com/file/d/1p8-Gm6zvBd0rsZfLatFL7YbvywDyYFV-/view?usp=sharing) |
-| LLama-70b-chat     | 5,479                     | 24,760                      | [Download](https://drive.google.com/file/d/14IsKwt4B8eGflLEsSDlboIAZlstYS95i/view?usp=sharing) |
+| LLama-7b-chat    | 1,297                    | 41,994                      | [Download](https://drive.google.com/file/d/1D4d4G8KJgtjqbkfhtYpyicwgW8rzX2Kq/view?usp=sharing) |
+| LLama-13b-chat    | 1,297                     | 41,822                     | [Download](https://drive.google.com/file/d/1p8-Gm6zvBd0rsZfLatFL7YbvywDyYFV-/view?usp=sharing) |
+| LLama-70b-chat     | 1,297                     | 24,760                      | [Download](https://drive.google.com/file/d/14IsKwt4B8eGflLEsSDlboIAZlstYS95i/view?usp=sharing) |
 
 
 
