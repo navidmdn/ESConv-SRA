@@ -75,7 +75,6 @@ Flask app to visualize the attention weights:
 cd attention_visualizer
 python app.py --data_dir /path/to/generated/pickle/files/from/previous/step
 ```
-<img width="1224" alt="ui" src="https://github.com/user-attachments/assets/67d19ede-f002-47ac-bc6c-e6944edc934b">
 
 Make sure you provide a directory with pickle files in the format we produce in the previous section
 using `prompting/multiple_strategy_continuation.py`. You will see a similar html page to the following
