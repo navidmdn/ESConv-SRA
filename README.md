@@ -1,9 +1,8 @@
-# ESConv-SRA
 
 This repository contains the code and the data for the paper "Steering Conversational Large Language Models for Long
 Emotional Support Conversations"
 
-## Data
+## Synthetic Strategy-Conditioned Data
 
 The original ESConv dataset is available under `esconv/` directory. You can run the `process_esconv.sh` to
 convert the data into a format that we use in our experiments. It will create a json file inside the same folder
@@ -22,12 +21,28 @@ part of the dataset is ready. You can currently download the first version of th
 
 | Model Used | Number of Conversations | Number of Continuations | Download Link |
 |------------|-------------------------|-------------------------|---------------|
-| LLama-7b-chat    | 9,354                    | 41,994                      | [Download](https://drive.google.com/file/d/1D4d4G8KJgtjqbkfhtYpyicwgW8rzX2Kq/view?usp=sharing) |
-| LLama-13b-chat    | 9,354                     | 41,994                     | [Download](https://drive.google.com/file/d/1p8-Gm6zvBd0rsZfLatFL7YbvywDyYFV-/view?usp=sharing) |
-| LLama-70b-chat     | 5,479                     | 24,760                      | [Download](https://drive.google.com/file/d/14IsKwt4B8eGflLEsSDlboIAZlstYS95i/view?usp=sharing) |
+| LLama-7b-chat    | 1,297                    | 41,994                      | [Download](https://drive.google.com/file/d/1D4d4G8KJgtjqbkfhtYpyicwgW8rzX2Kq/view?usp=sharing) |
+| LLama-13b-chat    | 1,297                     | 41,822                     | [Download](https://drive.google.com/file/d/1p8-Gm6zvBd0rsZfLatFL7YbvywDyYFV-/view?usp=sharing) |
+| LLama-70b-chat     | 1,297                     | 24,760                      | [Download](https://drive.google.com/file/d/14IsKwt4B8eGflLEsSDlboIAZlstYS95i/view?usp=sharing) |
 
 
+## Training
 
+All of the scripts and experiments for training our proposed models can be found in `training/` folder. You can use `prepare_classification_data.py` and `data_preparation.py` files to preprocess the synthetic data for building strategy classifier and fine-tuning Llama models. Also, `lora_finetuning_llama.py` and `train_strategy_classifier.py` can be used to train these models afterwards. A sample bash script to run the lora fine-tuning can be found in `lora_finetuning_llama.sh`.
+
+## Comparison
+
+You can compare two models with standard prompting on strategy adherence. Simply run the following command to load the two models and compare them side by side:
+
+```
+python head2head_livechat.py\
+ --model_name_or_path_1 'meta-llama/Meta-Llama-3-8B-Instruct'\
+ --model_name_or_path_2 'outputs/your_llama3_lora_finetuned_model'\
+```
+
+You'll get a UI as the image below and you can choose a strategy at each turn to respond with.
+
+<img width="1224" alt="ui" src="https://github.com/user-attachments/assets/7e698d91-c4bc-42ce-b2d4-d31091bec876">
 
 ## Experiments
 
