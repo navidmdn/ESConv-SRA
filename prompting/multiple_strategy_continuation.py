@@ -43,6 +43,11 @@ template5 = """You are a helpful and caring friend.\
  conversation for one turn using "{cur_strategy}" strategy ({strategy_description}) make your response short and to the point.\
  Do not provide additional info. only respond in ONE SENTENCE in this format: assistant: <one sentence response>"""
 
+template6 = """You are a helpful and caring friend.\
+ Your friend has come to you with some emotional problem. continue the\
+ conversation for one turn using "{cur_strategy}" strategy ({strategy_description}) make your response short and to the point,\
+ only satisfying the given strategy. Respond in this format: assistant: <response>"""
+
 
 def load_jsonl(path):
     with open(path, 'r') as f:
@@ -204,7 +209,7 @@ def get_model_and_tokenizer(model_name, cache_dir, load_in_4bit=True):
 
     if load_in_4bit:
         quantization_config = BitsAndBytesConfig(
-            load_in_8bit=False, load_in_4bit=True
+            load_in_8bit=False, load_in_4bit=load_in_4bit
         )
         # Copy the model to each device
         device_map = (
@@ -250,15 +255,15 @@ def get_continuation_prompt(conversation, model, tokenizer, model_type='llama', 
 
         if random.random() > sample_prob:
             continue
-        sys_msg = template4.format(situation=situation, cur_strategy=strategy, strategy_description=desc)
+        sys_msg = template6.format(situation=situation, cur_strategy=strategy, strategy_description=desc)
 
         if model_type == 'llama' or model_type == 'mistral':
             prompt = prompt_constructor(sys_msg, dialog, tokenizer, n_turns_as_conv=n_turns_as_conv, history_first=history_first)
             input_ids = tokenizer(prompt, return_tensors='pt', add_special_tokens=False)['input_ids'].to(model.device)
             # print("prompt: ", prompt)
-            if len(input_ids[0]) > 1400:
-                print(f"PROMPT LENGTH ({len(input_ids[0])}) exceeds the memory limit. skipping this instance")
-                continue
+            # if len(input_ids[0]) > 1400:
+            #     print(f"PROMPT LENGTH ({len(input_ids[0])}) exceeds the memory limit. skipping this instance")
+            #     continue
 
         elif model_type == 'mistral':
             pass
@@ -266,7 +271,7 @@ def get_continuation_prompt(conversation, model, tokenizer, model_type='llama', 
             raise ValueError(f"model_type should be one of ['llama', 'mistral'], but got {model_type}")
 
         #todo: currently aggregation only supports greedy decoding
-        outputs = model.generate(input_ids, do_sample=False,
+        outputs = model.generate(input_ids, do_sample=True, temperature=0.7,
                                  output_attentions=get_attentions, max_new_tokens=max_new_tokens,
                                  return_dict_in_generate=True)
         prompts[strategy] = prompt
