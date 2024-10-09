@@ -7,10 +7,13 @@ from prompting.llama_prompt import modified_extes_support_strategies
 
 
 def build_sys_msg_from_strategy_and_situation(strategy: str, situation: str) -> str:
+    if strategy == 'unconditional':
+        return """You are a helpful and caring AI which is an expert in emotional support."""
+
     description = modified_extes_support_strategies[strategy]
 
     return """You are a helpful and caring AI which is an expert in emotional support.\
- A user has come to you with the following situation: "{situation}".
+ A user has come to you with emotional challenges, distress or anxiety.\
  Use "{cur_strategy}" strategy ({strategy_description}) for answering the user.\
  make your response short and to the point.""".format(cur_strategy=strategy, strategy_description=description,
                                                       situation=situation)
@@ -29,6 +32,10 @@ def convert_conversations_to_chat_format(data: List[Dict]) -> List[Dict]:
 
         for label, resp in ex['responses'].items():
             cur_msgs = copy(messages)
+
+            if resp.startswith('assistant\n\n'):
+                resp = resp[11:]
+
             cur_msgs.append({'role': 'assistant', 'content': resp})
 
             sys_msg = build_sys_msg_from_strategy_and_situation(label, situation)
