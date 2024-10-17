@@ -11,5 +11,5 @@
 #  --min_turn 3 --max_turn 10 --n_turns_as_conv 1 --history_first True
 
 PYTHONPATH=.. python multiple_strategy_continuation.py --model_path meta-llama/Llama-3.1-70B-Instruct\
-  --cache_dir ../../hfcache/ --output_path outputs/extended_esc_llama31_70b --get_attentions False --prompt_constructor partial --n_iters -1\
+  --cache_dir ../../hfcache/ --output_path outputs/extended_esc_llama31_70b_v2 --get_attentions False --prompt_constructor partial --n_iters -1\
   --min_turn 3 --max_turn 12 --n_turns_as_conv 1 --history_first True

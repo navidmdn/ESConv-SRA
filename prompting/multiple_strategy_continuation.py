@@ -133,7 +133,7 @@ def convert_to_llama2_chat_partial_conv_format(sys_msg: str, conversations: List
     messages = [{'role': 'system', 'content': sys_msg}]
     messages.extend(conv_messages)
 
-    formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False)
+    formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     return formatted_prompt
 
 def convert_to_mistral_chat_partial_conv_format(sys_msg: str, conversations: List[str], tokenizer,
@@ -163,7 +163,7 @@ def convert_to_mistral_chat_partial_conv_format(sys_msg: str, conversations: Lis
     assert conv_messages[0]['role'] == 'user'
     conv_messages[0]['content'] = f"{sys_msg}\n\n{conv_messages[0]['content']}"
 
-    formatted_prompt = tokenizer.apply_chat_template(conv_messages, tokenize=False)
+    formatted_prompt = tokenizer.apply_chat_template(conv_messages, tokenize=False, add_generation_prompt=True)
     return formatted_prompt
 
 
@@ -174,7 +174,7 @@ def convert_to_llama2_chat_format(sys_msg: str, conversations: List[str], tokeni
         messages.append({'role': 'assistant', 'content': conversations[i + 1]})
     messages.append({'role': 'user', 'content': conversations[-1]})
 
-    formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False)
+    formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     return formatted_prompt
 
 
@@ -185,7 +185,7 @@ def convert_to_mistral_chat_format(sys_msg: str, conversations: List[str], token
         messages.append({'role': 'assistant', 'content': conversations[i + 1]})
     messages.append({'role': 'user', 'content': conversations[-1]})
 
-    formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False)
+    formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     return formatted_prompt
 
 
