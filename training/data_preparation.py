@@ -6,7 +6,7 @@ from tqdm import tqdm
 from prompting.llama_prompt import modified_extes_support_strategies
 
 
-def build_sys_msg_from_strategy_and_situation(strategy: str, situation: str) -> str:
+def build_sys_msg_from_strategy_and_situation(strategy: str) -> str:
     if strategy == 'unconditional':
         return """You are a helpful and caring AI which is an expert in emotional support."""
 
@@ -15,8 +15,7 @@ def build_sys_msg_from_strategy_and_situation(strategy: str, situation: str) -> 
     return """You are a helpful and caring AI which is an expert in emotional support.\
  A user has come to you with emotional challenges, distress or anxiety.\
  Use "{cur_strategy}" strategy ({strategy_description}) for answering the user.\
- make your response short and to the point.""".format(cur_strategy=strategy, strategy_description=description,
-                                                      situation=situation)
+ make your response short and to the point.""".format(cur_strategy=strategy, strategy_description=description)
 
 
 def convert_conversations_to_chat_format(data: List[Dict]) -> List[Dict]:
@@ -26,7 +25,6 @@ def convert_conversations_to_chat_format(data: List[Dict]) -> List[Dict]:
         messages = []
         speakers = ['user' if s == 'seeker' else 'assistant' for s in ex['speakers']]
         turns = [t.strip() for t in ex['dialog']]
-        situation = ex['situation']
         for s, t in zip(speakers, turns):
             messages.append({'role': s, 'content': t})
 
@@ -38,7 +36,7 @@ def convert_conversations_to_chat_format(data: List[Dict]) -> List[Dict]:
 
             cur_msgs.append({'role': 'assistant', 'content': resp})
 
-            sys_msg = build_sys_msg_from_strategy_and_situation(label, situation)
+            sys_msg = build_sys_msg_from_strategy_and_situation(label)
             cur_msgs.insert(0, {'role': 'system', 'content': sys_msg})
             processed_convs.append({'messages': cur_msgs, 'strategy': label})
 
