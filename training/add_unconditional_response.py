@@ -64,7 +64,8 @@ def get_model_and_tokenizer(model_name, cache_dir, load_in_4bit=True):
 
     return model, tokenizer
 
-def run(data_dir='../prompting/outputs/', output_path='./outputs', model_name_or_path='', load_in_4bit=True, max_new_tokens=512, cache_dir=None):
+def run(data_dir='../prompting/outputs/', output_path='./outputs/out.json', model_name_or_path='', load_in_4bit=True,
+        max_new_tokens=1024, cache_dir=None):
     all_files = glob(os.path.join(data_dir, '*.json'))
     model, tokenizer = get_model_and_tokenizer(model_name_or_path, cache_dir, load_in_4bit)
     tokenizer.padding_side = 'left'
@@ -93,3 +94,4 @@ def run(data_dir='../prompting/outputs/', output_path='./outputs', model_name_or
 
 if __name__ == '__main__':
     fire.Fire(run)
+

@@ -166,7 +166,7 @@ def training_function(script_args, training_args):
     )
 
     dev_datasets = {}
-    dev_files = glob.glob(os.path.join(script_args.dev_dir, "*val.json"))
+    dev_files = glob.glob(os.path.join(script_args.dev_dir, "*val.json")) + glob.glob(os.path.join(script_args.dev_dir, "*dev.json"))
     print(f"list of validation files: {dev_files}")
 
     if len(dev_files) > 0:

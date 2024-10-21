@@ -48,7 +48,7 @@ WANDB_MODE=online WANDB_ENTITY=navidmdn WANDB_PROJECT=esconv-sra-lora python lor
   --save_strategy steps\
   --eval_strategy steps\
   --save_total_limit 1\
-  --metric_for_best_model "main_val_loss"\
+  --metric_for_best_model "eval_dev_loss"\
   --save_steps 20\
   --logging_steps 5\
   --overwrite_output_dir\

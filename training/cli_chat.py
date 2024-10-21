@@ -22,7 +22,7 @@ def turn_print(role, msg, strategy=None):
 
 def get_sys_msg_with_strategy(strategy):
     if strategy == None:
-        return """You are a helpful and caring AI which is an expert in emotional support."""
+        return """You are a helpful, precise and accurate emotional support expert"""
 
     description = modified_extes_support_strategies[strategy]
 
