@@ -2,6 +2,22 @@
 This repository contains the code and the data for the paper "Steering Conversational Large Language Models for Long
 Emotional Support Conversations"
 
+## Using the model
+
+Our fine-tuned `llama3-8b-instruct` lora weights are hosted on huggingface [here](https://huggingface.co/navidmadani/esconv_sra_llama3_8b).
+You can use `cli_chat.py` script to chat with the model. You can run the following command to chat with the model, at each
+turn you are asked to choose a strategy to continue the conversation (or choose to continue without any strategy):
+
+```sh
+python cli_chat.py --model_name_or_path navidmadani/esconv_sra_llama3_8b
+```
+
+You can use the following code to load the model and generate continuations with your desired strategy at each turn:
+
+```python
+PYTHONPATH=.. python cli_chat.py --model_path navidmadani/esconv_sra_llama3_8b
+```
+
 ## Synthetic Strategy-Conditioned Data
 
 The original ESConv dataset is available under `esconv/` directory. You can run the `process_esconv.sh` to
@@ -19,12 +35,13 @@ different strategies. Along with this information we also provide the exact prom
 We are on the mission to complete this dataset and make it available for the public. We will update this section once each
 part of the dataset is ready. You can currently download the first version of the dataset from [this link](https://drive.google.com/file/d/11UOExWowxcQfi168zGJ5M2AJmK9J_MaV/view?usp=sharing)
 
-| Model Used | Number of Conversations | Number of Continuations | Download Link |
-|------------|-------------------------|-------------------------|---------------|
-| LLama-7b-chat    | 1,297                    | 41,994                      | [Download](https://drive.google.com/file/d/1D4d4G8KJgtjqbkfhtYpyicwgW8rzX2Kq/view?usp=sharing) |
-| LLama-13b-chat    | 1,297                     | 41,822                     | [Download](https://drive.google.com/file/d/1p8-Gm6zvBd0rsZfLatFL7YbvywDyYFV-/view?usp=sharing) |
-| LLama-70b-chat     | 1,297                     | 24,760                      | [Download](https://drive.google.com/file/d/14IsKwt4B8eGflLEsSDlboIAZlstYS95i/view?usp=sharing) |
+| Model Used      | Number of Conversations | Number of Continuations | Download Link |
+|-----------------|-------------------------|-------------------------|---------------|
+| LLama2-7b-chat  | 1,297                    | 41,994                      | [Download](https://drive.google.com/file/d/1D4d4G8KJgtjqbkfhtYpyicwgW8rzX2Kq/view?usp=sharing) |
+| LLama2-13b-chat | 1,297                     | 41,822                     | [Download](https://drive.google.com/file/d/1p8-Gm6zvBd0rsZfLatFL7YbvywDyYFV-/view?usp=sharing) |
+| LLama2-70b-chat | 1,297                     | 24,760                      | [Download](https://drive.google.com/file/d/14IsKwt4B8eGflLEsSDlboIAZlstYS95i/view?usp=sharing) |
 
+Our most recent dataset which is generated based on `llama3-70b-instruct` is hosted on huggingface [here](https://huggingface.co/datasets/navidmadani/extended_esc?row=93).
 
 ## Training
 

@@ -40,7 +40,6 @@ def generate_resp(model, tokenizer, sys_msg, examples, device, temperature=0.8, 
         *ex['messages'],
     ] for ex in examples]
 
-    print(prompts[0])
     input_chat_prompts = [tokenizer.apply_chat_template(
         prompt,
         add_generation_prompt=True,
